@@ -7,6 +7,10 @@ class App extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.startCount = this.startCount.bind(this);
     this.stopCount = this.stopCount.bind(this);
+    this.plusOne = this.plusOne.bind(this);
+    this.plusFive = this.plusFive.bind(this);
+    this.plusTen = this.plusTen.bind(this);
+    this.resetCount = this.resetCount.bind(this);
     this.state = {
       minutes: 0,
       seconds: 0,
@@ -33,6 +37,7 @@ class App extends React.Component {
     if (seconds === 0 && minutes === 0 && working === true) {
       clearInterval(this.myInterval)
       this.setState({ working: false });
+      alert('FIM DO INTERVALO! #VQV')
     }
   }
 
@@ -54,6 +59,28 @@ class App extends React.Component {
     clearInterval(this.myInterval);
   }
 
+  plusOne() {
+    this.setState((previous, _props) => ({ minutes: previous.minutes + 1 }));
+  }
+
+  plusFive() {
+    this.setState((previous, _props) => ({ minutes: previous.minutes + 5 }));
+  }
+
+  plusTen() {
+    this.setState((previous, _props) => ({ minutes: previous.minutes + 10 }));
+  }
+
+  resetCount() {
+    const { working } = this.state;
+    if (working) {
+      clearInterval(this.myInterval);
+      this.setState({ minutes: 0, seconds: 0, working: false })
+    }
+    if(!working) this.setState({ minutes: 0, seconds: 0, working: false })
+    
+  }
+
   render() {
     const { minutes, seconds } = this.state;
     return (
@@ -65,8 +92,16 @@ class App extends React.Component {
           <Clock name='minutes' value={minutes} onChange={this.onChange} max='99' /> 
           <span>:</span>
           <Clock name='seconds' value={seconds} onChange={this.onChange} max='60' />
-          <button type='button' onClick={this.startCount}>INICIAR</button>
-          <button type='button' onClick={this.stopCount}>PARAR</button>
+          <div>
+          <button type='button' onClick={this.startCount}>START!</button>
+          <button type='button' onClick={this.stopCount}>STOP!</button>
+          <button type='button' onClick={this.resetCount}>RESET</button>
+          </div>
+          <div>
+            <button type='button' onClick={this.plusOne}>+ 1min</button>
+            <button type='button' onClick={this.plusFive}>+ 5min</button>
+            <button type='button' onClick={this.plusTen}>+ 10min</button>
+          </div>
         </main>
       </div>
     );
