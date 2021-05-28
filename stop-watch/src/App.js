@@ -28,8 +28,8 @@ class App extends React.Component {
     if (minutes > 99 && working === false) {
       this.setState({ minutes: 99})
     }
-    if (seconds > 60 && working === false) {
-      this.setState({ seconds: 60})
+    if (seconds >= 60 && working === false) {
+      this.setState({ seconds: 59})
     }
     if(seconds === -1 && minutes > 0 && working === true) {
       this.setState((previous, _prop) => ({ minutes: previous.minutes - 1, seconds: 59 }))
@@ -82,8 +82,8 @@ class App extends React.Component {
 
   halfSecond() {
     const { seconds } = this.state;
-    if (seconds === 60) {
-      this.setState((previous, _props) => ({ minutes: previous.minutes + 1, seconds: 30 }));
+    if (seconds === 30) {
+      this.setState((previous, _props) => ({ minutes: previous.minutes + 1, seconds: 0 }));
     } else if (seconds + 30 <= 60) {
       this.setState((previous, _props) => ({ seconds: previous.seconds + 30 }))
     } else {
