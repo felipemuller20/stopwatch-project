@@ -5,35 +5,68 @@ class App extends React.Component {
   constructor() {
     super();
     this.onChange = this.onChange.bind(this);
+    this.startCount = this.startCount.bind(this);
+    this.stopCount = this.stopCount.bind(this);
     this.state = {
-      hour: '00',
-      minutes: '00',
-      seconds: '00',
+      minutes: 0,
+      seconds: 0,
+      working: false,
     };
   }
 
+
   componentDidMount() {
-    // setInterval(() => console.log(this.state.seconds), 1000);
+
+  }
+
+  componentDidUpdate() {
+    const { minutes, seconds, working } = this.state;
+    if (minutes > 99 && working === false) {
+      this.setState({ minutes: 99})
+    }
+    if (seconds > 60 && working === false) {
+      this.setState({ seconds: 60})
+    }
+    if(seconds === 0 && minutes > 0 && working === true) {
+      this.setState((previous, _prop) => ({ minutes: previous.minutes - 1, seconds: 60 }))
+    }
+    if (seconds === 0 && minutes === 0 && working === true) {
+      clearInterval(this.myInterval)
+      this.setState({ working: false });
+    }
   }
 
   onChange(event) {
     const { name, value } = event.target;
-    this.setState({ [name]: value});
+    this.setState({ [name]: parseInt(value, 10)});
+  }
+
+  startCount() {
+    const { working } = this.state;
+    if (working === false) {
+      this.setState({ working: true });
+      this.myInterval = setInterval(() => this.setState((previous, _prop) => ({ seconds: previous.seconds - 1 })), 1000);
+    }
+  }
+
+  stopCount() {
+    this.setState({ working: false });
+    clearInterval(this.myInterval);
   }
 
   render() {
-    const { hour, minutes, seconds } = this.state;
+    const { minutes, seconds } = this.state;
     return (
       <div>
         <header>
           StopWatch
         </header>
         <main>
-          <Clock name='hour' value={hour} onChange={this.onChange} max='60'/> 
-          :
-          <Clock name='minutes' value={minutes} onChange={this.onChange} /> 
-          :
-          <Clock name='seconds' value={seconds} onChange={this.onChange} />
+          <Clock name='minutes' value={minutes} onChange={this.onChange} max='99' /> 
+          <span>:</span>
+          <Clock name='seconds' value={seconds} onChange={this.onChange} max='60' />
+          <button type='button' onClick={this.startCount}>INICIAR</button>
+          <button type='button' onClick={this.stopCount}>PARAR</button>
         </main>
       </div>
     );
