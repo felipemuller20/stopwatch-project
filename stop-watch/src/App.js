@@ -15,6 +15,7 @@ class App extends React.Component {
     this.resetCount = this.resetCount.bind(this);
     this.halfSecond = this.halfSecond.bind(this);
     this.lessHalfSecond = this.lessHalfSecond.bind(this);
+    this.lessMinute = this.lessMinute.bind(this);
     this.state = {
       minutes: 0,
       seconds: 0,
@@ -103,6 +104,15 @@ class App extends React.Component {
     }
   }
 
+  lessMinute() {
+    const { minutes, seconds } = this.state;
+    if (minutes > 0) {
+      this.setState((previous, _props) => ({ minutes: previous.minutes - 1}));
+    } else if (minutes === 0 && seconds > 0) {
+      this.setState({ seconds: 0});
+    }
+  }
+
   render() {
     const { minutes, seconds } = this.state;
     return (
@@ -132,6 +142,7 @@ class App extends React.Component {
           <div className='seconds-buttons-container'>
           <button type='button' onClick={this.halfSecond}>+ 30seg</button>
           <button type='button' onClick={this.lessHalfSecond}>- 30seg</button>
+          <button type='button' onClick={this.lessMinute}>- 1min</button>
           </div>
           <div>
             <img src={gatoImg} alt="Gif do relogato" className="cat-img" />
