@@ -1,5 +1,6 @@
 import React from 'react';
 import Clock from './components/Clock';
+import './App.css'
 
 class App extends React.Component {
   constructor() {
@@ -11,16 +12,13 @@ class App extends React.Component {
     this.plusFive = this.plusFive.bind(this);
     this.plusTen = this.plusTen.bind(this);
     this.resetCount = this.resetCount.bind(this);
+    this.halfSecond = this.halfSecond.bind(this);
+    this.lessHalfSecond = this.lessHalfSecond.bind(this);
     this.state = {
       minutes: 0,
       seconds: 0,
       working: false,
     };
-  }
-
-
-  componentDidMount() {
-
   }
 
   componentDidUpdate() {
@@ -36,7 +34,7 @@ class App extends React.Component {
     }
     if (seconds === 0 && minutes === 0 && working === true) {
       clearInterval(this.myInterval)
-      this.setState({ working: false });
+      this.setState({ working: false, alert: true });
       alert('FIM DO INTERVALO! #VQV')
     }
   }
@@ -78,7 +76,30 @@ class App extends React.Component {
       this.setState({ minutes: 0, seconds: 0, working: false })
     }
     if(!working) this.setState({ minutes: 0, seconds: 0, working: false })
-    
+  }
+
+  halfSecond() {
+    const { seconds } = this.state;
+    if (seconds === 60) {
+      this.setState((previous, _props) => ({ minutes: previous.minutes + 1, seconds: 30 }));
+    } else if (seconds + 30 <= 60) {
+      this.setState((previous, _props) => ({ seconds: previous.seconds + 30 }))
+    } else {
+      this.setState((previous, _props) => ({ minutes: previous.minutes + 1, seconds: previous.seconds - 30}))
+    }
+  }
+
+  lessHalfSecond() {
+    const { seconds, minutes } = this.state;
+    if (seconds === 30) {
+      this.setState({ seconds: 0 })
+    } else if (seconds - 30 > 0) {
+      this.setState((previous, _props) => ({ seconds: previous.seconds - 30 }))
+    } else if(seconds - 30 < 0 && minutes === 0) {
+      this.setState({ minutes: 0, seconds: 0});
+    } else {
+      this.setState((previous, _props) => ({ minutes: previous.minutes - 1, seconds: previous.seconds + 30}))
+    }
   }
 
   render() {
@@ -88,19 +109,26 @@ class App extends React.Component {
         <header>
           StopWatch
         </header>
+        <span>
+        Digite ou pressione os botões
+        </span>
         <main>
           <Clock name='minutes' value={minutes} onChange={this.onChange} max='99' /> 
           <span>:</span>
           <Clock name='seconds' value={seconds} onChange={this.onChange} max='60' />
           <div>
-          <button type='button' onClick={this.startCount}>START!</button>
-          <button type='button' onClick={this.stopCount}>STOP!</button>
-          <button type='button' onClick={this.resetCount}>RESET</button>
+          <button type='button' onClick={this.startCount}>COMEÇAR!</button>
+          <button type='button' onClick={this.stopCount}>PARAR!</button>
+          <button type='button' onClick={this.resetCount}>ZERAR</button>
           </div>
           <div>
             <button type='button' onClick={this.plusOne}>+ 1min</button>
             <button type='button' onClick={this.plusFive}>+ 5min</button>
             <button type='button' onClick={this.plusTen}>+ 10min</button>
+          </div>
+          <div>
+          <button type='button' onClick={this.halfSecond}>+ 30seg</button>
+          <button type='button' onClick={this.lessHalfSecond}>- 30seg</button>
           </div>
         </main>
       </div>
