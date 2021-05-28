@@ -1,6 +1,7 @@
 import React from 'react';
 import Clock from './components/Clock';
 import './App.css'
+import gatoImg from './images/gato.gif';
 
 class App extends React.Component {
   constructor() {
@@ -131,6 +132,9 @@ class App extends React.Component {
           <div className='seconds-buttons-container'>
           <button type='button' onClick={this.halfSecond}>+ 30seg</button>
           <button type='button' onClick={this.lessHalfSecond}>- 30seg</button>
+          </div>
+          <div>
+            <img src={gatoImg} alt="Gif do relogato" className="cat-img" />
           </div>
         </main>
       </div>
