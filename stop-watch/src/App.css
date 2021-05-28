@@ -58,6 +58,20 @@ span {
   font-size: 20px;
 }
 
+button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  border: 1px solid black;
+}
+
+button:active, input:active {
+  transform: translateY(4px);
+}
+
+input:hover {
+  border: 2px solid black;
+}
+
 #start {
   background-image: linear-gradient(to right, #2d6a4f , #74c69d);
 }
