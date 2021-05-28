@@ -1,0 +1,75 @@
+body{
+  margin-top: 110px;
+  background-image: url("./images/photo-1553095066-5014bc7b7f2d.jpeg");
+  background-size:cover
+}
+
+h1, h2 {
+  text-align: center;
+  font-family: 'Sigmar One', cursive;
+  font-size: 2em;
+  font-weight: 100;
+  margin-top: 0;
+  color: whitesmoke;
+}
+
+.clock-container {
+  display: flex;
+  justify-content: center;
+  font-size: 2em;
+  margin-top: 100px;
+}
+
+.clock-container input {
+  font-family: 'Odibee Sans', cursive;
+  font-size: 1.5em;
+  text-align: center;
+  color:#000000;
+  background:#f2f2f2;
+  border:0px solid #ffffff;
+  text-shadow:-1px 1px 0px #fff;
+  box-shadow:0px 0px 5px #000000;
+  border-radius:20px 20px 20px 20px;
+  width:90px;
+  height: 50px;
+  margin: 10px 5px;
+}
+
+span {
+  padding: 10px;
+}
+
+.main-buttons-container, .minutes-buttons-container, .seconds-buttons-container {
+  display: flex;
+  justify-content: center;
+}
+
+.main-buttons-container button, .minutes-buttons-container button, .seconds-buttons-container button  {
+  color:#000000;
+  background:#f2f2f2;
+  border:0px solid #ffffff;
+  box-shadow:0px 0px 5px #000000;
+  border-radius:20px 20px 20px 20px;
+  width:90px;
+  height: 25px;
+  margin: 10px 5px;
+  font-family: 'Odibee Sans', cursive;
+  font-weight: 100;
+  font-size: 20px;
+}
+
+#start {
+  background-image: linear-gradient(to right, #2d6a4f , #74c69d);
+}
+
+#stop {
+  background-image: linear-gradient(to right, #ec5934 , #eaa981);
+}
+
+#reset {
+  background-image: linear-gradient(to right, #b1a7a6 , #d3d3d3);
+}
+
+img {
+  width: 500px;
+}

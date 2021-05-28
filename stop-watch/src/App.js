@@ -107,26 +107,28 @@ class App extends React.Component {
     return (
       <div>
         <header>
-          StopWatch
+          <h1>StopWatch</h1>
+          <h2>
+            Digite ou pressione os botões
+          </h2>
         </header>
-        <span>
-        Digite ou pressione os botões
-        </span>
         <main>
+          <div className='clock-container'>
           <Clock name='minutes' value={minutes} onChange={this.onChange} max='99' /> 
           <span>:</span>
           <Clock name='seconds' value={seconds} onChange={this.onChange} max='60' />
-          <div>
-          <button type='button' onClick={this.startCount}>COMEÇAR!</button>
-          <button type='button' onClick={this.stopCount}>PARAR!</button>
-          <button type='button' onClick={this.resetCount}>ZERAR</button>
           </div>
-          <div>
+          <div className='main-buttons-container'>
+            <button type='button' onClick={this.startCount} id='start'>COMEÇAR!</button>
+            <button type='button' onClick={this.stopCount} id='stop'>PARAR!</button>
+            <button type='button' onClick={this.resetCount} id='reset'>ZERAR</button>
+          </div>
+          <div className='minutes-buttons-container'>
             <button type='button' onClick={this.plusOne}>+ 1min</button>
             <button type='button' onClick={this.plusFive}>+ 5min</button>
             <button type='button' onClick={this.plusTen}>+ 10min</button>
           </div>
-          <div>
+          <div className='seconds-buttons-container'>
           <button type='button' onClick={this.halfSecond}>+ 30seg</button>
           <button type='button' onClick={this.lessHalfSecond}>- 30seg</button>
           </div>
