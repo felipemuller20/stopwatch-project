@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Clock extends React.Component {
+class Timer extends React.Component {
   render() {
     const { name, value, onChange, max } = this.props;
     return (
@@ -11,4 +11,4 @@ class Clock extends React.Component {
   }
 }
 
-export default Clock;
+export default Timer;

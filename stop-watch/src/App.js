@@ -1,7 +1,10 @@
 import React from 'react';
-import Clock from './components/Clock';
+import Timer from './components/Timer';
 import './App.css'
 import gatoImg from './images/gato.gif';
+import TimerSettings from './components/TimerSettings';
+import MoreMinutes from './components/MoreMinutes';
+import SecondsAndReduce from './components/SecondsAndReduce';
 
 class App extends React.Component {
   constructor() {
@@ -125,25 +128,25 @@ class App extends React.Component {
         </header>
         <main>
           <div className='clock-container'>
-          <Clock name='minutes' value={minutes} onChange={this.onChange} max='99' /> 
+          <Timer name='minutes' value={minutes} onChange={this.onChange} max='99' /> 
           <span>:</span>
-          <Clock name='seconds' value={seconds} onChange={this.onChange} max='60' />
+          <Timer name='seconds' value={seconds} onChange={this.onChange} max='60' />
           </div>
-          <div className='main-buttons-container'>
-            <button type='button' onClick={this.startCount} id='start'>COMEÇAR!</button>
-            <button type='button' onClick={this.stopCount} id='stop'>PARAR!</button>
-            <button type='button' onClick={this.resetCount} id='reset'>ZERAR</button>
-          </div>
-          <div className='minutes-buttons-container'>
-            <button type='button' onClick={this.plusOne}>+ 1min</button>
-            <button type='button' onClick={this.plusFive}>+ 5min</button>
-            <button type='button' onClick={this.plusTen}>+ 10min</button>
-          </div>
-          <div className='seconds-buttons-container'>
-          <button type='button' onClick={this.halfSecond}>+ 30seg</button>
-          <button type='button' onClick={this.lessHalfSecond}>- 30seg</button>
-          <button type='button' onClick={this.lessMinute}>- 1min</button>
-          </div>
+          <TimerSettings 
+            start={this.startCount}
+            stop={this.stopCount}
+            reset={this.resetCount}
+          />
+          <MoreMinutes 
+            plusOne={this.plusOne}
+            plusFive={this.plusFive}
+            plusTen={this.plusTen}
+          />
+          <SecondsAndReduce 
+          plusHalf={this.halfSecond}
+          minusHalf={this.lessHalfSecond}
+          minusOne={this.lessMinute}
+          />
           <div>
             <img src={gatoImg} alt="Gif do relogato" className="cat-img" />
           </div>
