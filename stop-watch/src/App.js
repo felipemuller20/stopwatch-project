@@ -31,12 +31,12 @@ class App extends React.Component {
     if (seconds > 60 && working === false) {
       this.setState({ seconds: 60})
     }
-    if(seconds === 0 && minutes > 0 && working === true) {
-      this.setState((previous, _prop) => ({ minutes: previous.minutes - 1, seconds: 60 }))
+    if(seconds === -1 && minutes > 0 && working === true) {
+      this.setState((previous, _prop) => ({ minutes: previous.minutes - 1, seconds: 59 }))
     }
-    if (seconds === 0 && minutes === 0 && working === true) {
+    if (seconds === -1 && minutes === 0 && working === true) {
       clearInterval(this.myInterval)
-      this.setState({ working: false, alert: true });
+      this.setState({ working: false, seconds: 0 });
       alert('FIM DO INTERVALO! #VQV')
     }
   }
